@@ -64,6 +64,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
+      patterns: [
+        { from: "favicon.ico", to: "" },
+      ],
     }),
     new MiniCssExtractPlugin({
       filename: filename('css'),
