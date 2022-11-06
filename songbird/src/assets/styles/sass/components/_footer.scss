@@ -1,0 +1,33 @@
+.footer {
+  height: 80px;
+  padding-bottom: 40px;
+}
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo__img {
+  display: block;
+  min-width: 110px;
+  height: 40px;
+  background-size: contain;
+  background-image: url("../../logo/rs-school.svg");
+  background-repeat: no-repeat;
+}
+
+.footer__designed {
+  display: flex;
+  align-items: center;
+}
+
+.designed__img {
+  display: inline-block;
+  min-width: 35px;
+  height: 30px;
+  background-size: contain;
+  background-image: url("../../logo/github-logo.svg");
+  background-repeat: no-repeat;
+}

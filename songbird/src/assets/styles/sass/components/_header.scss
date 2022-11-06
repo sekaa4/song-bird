@@ -1,0 +1,18 @@
+.header {
+  height: 80px;
+  padding-top: 25px;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  min-width: 200px;
+  height: 55px;
+  background-size: cover;
+  background-image: url("../../logo/logo.svg");
+  background-repeat: no-repeat;
+}
