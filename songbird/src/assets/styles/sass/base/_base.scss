@@ -1,0 +1,14 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  @extend %font-main;
+  @include font(1.4rem, 1.4, 500);
+  background-color: $color-gray;
+}
+
+h1 {
+  @include font(1.4rem, 0.8, 700);
+  padding-top: 30px;
+}
