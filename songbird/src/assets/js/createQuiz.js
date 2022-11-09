@@ -105,6 +105,7 @@ function checkAnswer(e) {
     btnNext.disabled = false;
     correct.play();
     liArray.forEach(el => el.removeEventListener('click', checkAnswer));
+    liArray.forEach(el => el.addEventListener('click', withoutCheckAnswer));
     score();
 
     if (!item.nextElementSibling) {
@@ -229,4 +230,16 @@ function score() {
   const scoreNumber = +score.innerHTML;
   const failsNumber = scoreCorrectAnswer - failAnswers.length;
   score.innerHTML = ('0' + (scoreNumber + failsNumber)).slice(-2);
+}
+
+function withoutCheckAnswer(e) {
+  const item = document.querySelector('.quiz-item.active');
+
+  const { id } = item;
+  const data = birdsData.slice(id);
+  const birdsArr = data[0];
+  const container = document.querySelectorAll('.answer-options__container')[1];
+  const bird = birdsArr.find(el => el.name === e.target.textContent);
+
+  description(bird, container);
 }
