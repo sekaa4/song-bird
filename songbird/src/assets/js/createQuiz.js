@@ -191,6 +191,7 @@ function createSound() {
 function changePanel(e) {
   const item = document.querySelector('.quiz-item.active');
   const main = document.getElementById('app');
+  const btnNext = document.getElementById('btn-next');
 
   if (!item.nextElementSibling) {
     window.location.hash = '#result';
@@ -210,5 +211,6 @@ function changePanel(e) {
       <span>Выберите птицу из списка</span>
     </p >`);
 
+  btnNext.disabled = true;
   createQuiz(data);
 }
