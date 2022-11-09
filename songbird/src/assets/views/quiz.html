@@ -1,7 +1,7 @@
 <div class="quiz-title">
   <h2 class="quiz-title__text">Score: <span class="quiz-title__score">0</span></h2>
   <ul class="quiz-list">
-    <li class="quiz-item active"><a class="quize-link" href="/#">Разминка</a></li>
+    <li class="quiz-item"><a class="quize-link" href="/#">Разминка</a></li>
     <li class="quiz-item"><a class="quiz-link" href="/#">Воробьиные</a></li>
     <li class="quiz-item"><a class="quiz-link" href="/#">Лесные птицы</a></li>
     <li class="quiz-item"><a class="quiz-link" href="/#">Певчие птицы</a></li>
@@ -10,16 +10,17 @@
   </ul>
 </div>
 <div class="quiz-random-bird">
-  <div></div>
 </div>
 <div class="answer-options">
   <div class="answer-options__container">
   </div>
   <div class="answer-options__container">
+    <p class="answer-options__discription">
+      <span>Послушайте плеер.</span>
+      <span>Выберите птицу из списка</span>
+    </p>
   </div>
-  <div class="button-container">
-    <button class="btn">Next Level</button>
+  <div class="answer-options__button button-container">
+    <button class="btn" id="btn-next" disabled>Next Level</button>
   </div>
 </div>
-<audio src="/static/media/win.a1e9e8b6.mp3" id="winSound"></audio>
-<audio src="/static/media/error.165166d5.mp3" id="errorSound"></audio>
