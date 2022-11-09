@@ -48,8 +48,34 @@
   background-color: #303030;
 }
 
+.radio-btn {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #555;
+  background-color: #303030;
+}
+
+.answer-options__item {
+  cursor: pointer;
+  user-select: none;
+}
+
 .button-container {
   width: 100%;
   margin: 25px 15px;
+  background-color: #303030;
+}
+
+.error {
+  background-color: red;
+}
+
+.correct {
+  background-color: green;
+}
+
+.active {
   background-color: #303030;
 }

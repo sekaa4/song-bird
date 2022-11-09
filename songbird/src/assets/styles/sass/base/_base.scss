@@ -17,6 +17,11 @@ h2 {
   @include font(1.8rem, 0.8, 700);
 }
 
+h3 {
+  @include font(2.4rem, 0.8, 500);
+  color: $color-white;
+}
+
 p {
   @include font(1.8rem, 0.8, 500);
 }
