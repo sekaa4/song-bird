@@ -93,6 +93,7 @@ function checkAnswer(e) {
   if (e.target.textContent === quizName.dataset.name) {
     const item = document.querySelector('.quiz-item.active');
     const bird = birdsArr.find(el => el.name === quizName.dataset.name);
+
     description(bird, container);
     img.src = bird.image;
     quizName.textContent = quizName.dataset.name;
@@ -101,9 +102,11 @@ function checkAnswer(e) {
     btnNext.disabled = false;
     correct.play();
     liArray.forEach(el => el.removeEventListener('click', checkAnswer));
+    score();
 
     if (!item.nextElementSibling) {
       btnNext.textContent = 'Закончить Викторину';
+      localStorageDataSave(score.innerHTML);
     }
   } else {
     const bird = birdsArr.find(el => el.name === e.target.textContent);
@@ -213,4 +216,14 @@ function changePanel(e) {
 
   btnNext.disabled = true;
   createQuiz(data);
+}
+
+function score() {
+  const score = document.querySelector('.quiz-title__score');
+  const scoreCorrectAnswer = 5;
+  const failAnswers = document.querySelectorAll('.radio-btn.error');
+
+  const scoreNumber = +score.innerHTML;
+  const failsNumber = scoreCorrectAnswer - failAnswers.length;
+  score.innerHTML = ('0' + (scoreNumber + failsNumber)).slice(-2);
 }
