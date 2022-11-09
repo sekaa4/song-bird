@@ -42,6 +42,7 @@ export default function createQuiz(birds = birdsData) {
 
   const audio = document.createElement('audio');
   const urlAudio = obj.audio;
+  audio.className = 'audio-player__random';
   audio.src = urlAudio;
   audio.controls = true;
 
@@ -83,6 +84,7 @@ function checkAnswer(e) {
   const btnNext = document.getElementById('btn-next');
   const liArray = document.querySelectorAll('.answer-options__item');
   const item = document.querySelector('.quiz-item.active');
+  const audio = document.querySelector('.audio-player__random');
   const { id } = item;
   const data = birdsData.slice(id);
 
@@ -91,6 +93,7 @@ function checkAnswer(e) {
   const container = document.querySelectorAll('.answer-options__container')[1];
 
   if (e.target.textContent === quizName.dataset.name) {
+    audio.load();
     const item = document.querySelector('.quiz-item.active');
     const bird = birdsArr.find(el => el.name === quizName.dataset.name);
 
