@@ -1,4 +1,5 @@
 import createQuiz from './createQuiz';
+import createResult from './createResult';
 export default function Router(routes) {
   try {
     if (!routes) {
@@ -47,12 +48,13 @@ Router.prototype = {
   },
   goToRoute: function (htmlName) {
     (function (scope) {
-      let url = htmlName;
+      let url = 'views/' + htmlName;
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
           scope.rootElem.innerHTML = this.responseText;
-          if (window.location.hash.slice(1) === 'quiz') createQuiz();
+          if (window.location.hash === '#quiz') createQuiz();
+          if (window.location.hash === '#result') createResult();
         }
       };
       xhttp.open('GET', url, true);

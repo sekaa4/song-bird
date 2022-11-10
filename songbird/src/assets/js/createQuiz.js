@@ -106,14 +106,21 @@ function checkAnswer(e) {
 
     e.target.firstElementChild.classList.add('correct');
     btnNext.disabled = false;
-    correct.play();
     liArray.forEach(el => el.removeEventListener('click', checkAnswer));
     liArray.forEach(el => el.addEventListener('click', withoutCheckAnswer));
     score();
 
     if (!item.nextElementSibling) {
-      btnNext.textContent = 'Закончить Викторину';
-      localStorageDataSave(score.innerHTML);
+      const score = document.querySelector('.quiz-title__score');
+      const buttonCancel = document.querySelector('.answer-options__cancel');
+      correct.load();
+      correct.play();
+
+      const timerId = setTimeout(() => window.location.hash = '#result', 5000);
+
+      localStorage.setItem('saveResult', score.innerHTML);
+      localStorage.setItem('timerId', timerId);
+      if (buttonCancel) buttonCancel.disabled = false;
     }
   } else {
     const bird = birdsArr.find(el => el.name === e.target.textContent);
@@ -222,6 +229,27 @@ function changePanel(e) {
     </p >`);
 
   btnNext.disabled = true;
+
+  const itemAlreadyActive = document.querySelector('.quiz-item.active');
+
+  if (!itemAlreadyActive.nextElementSibling) {
+    const divButton = document.querySelector('.answer-options__button');
+    const div = document.createElement('div');
+    const button = document.createElement('button');
+
+    button.className = 'answer-options__cancel btn';
+    button.textContent = 'Отмена перехода';
+    button.disabled = true;
+    button.onclick = () => clearTimeout(localStorage.getItem('timerId'));
+
+    div.className = 'answer-options__finish-text';
+    div.textContent = 'Это последний вопрос, переход будет выполнен автоматически, спустя 5 сек, после правильного ответа или после нажатия на кнопку, для отмены автоматического перехода, нажмите "Отмена перехода"';
+
+    divButton.append(button);
+    divButton.append(div);
+    btnNext.textContent = 'Завершить Викторину';
+  }
+
   createQuiz(data);
 }
 
