@@ -66,7 +66,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: "favicon.ico", to: "" },
-        { from: "assets/views", to: "" },
+        { from: "assets/views", to: "views" },
       ],
     }),
     new MiniCssExtractPlugin({
