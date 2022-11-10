@@ -93,8 +93,11 @@ function checkAnswer(e) {
   const container = document.querySelectorAll('.answer-options__container')[1];
 
   if (e.target.textContent === quizName.dataset.name) {
-    audio.load();
     const item = document.querySelector('.quiz-item.active');
+
+    audio.load();
+    correct.load();
+    correct.play();
     const bird = birdsArr.find(el => el.name === quizName.dataset.name);
 
     description(bird, container);
