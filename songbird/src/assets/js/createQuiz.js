@@ -124,13 +124,19 @@ function checkAnswer(e) {
     if (!item.nextElementSibling) {
       const score = document.querySelector('.quiz-title__score');
       const buttonCancel = document.querySelector('.answer-options__cancel');
+      let timerId = null;
       correct.load();
       correct.play();
 
-      const timerId = setTimeout(() => window.location.hash = '#result', 5000);
+      if (localStorage.getItem('timerId')) {
+        localStorage.removeItem('timerId');
+      } else {
+        timerId = setTimeout(() => window.location.hash = '#result', 5000);
+        localStorage.setItem('timerId', timerId);
+      }
+
 
       localStorage.setItem('saveResult', score.innerHTML);
-      localStorage.setItem('timerId', timerId);
       if (buttonCancel) buttonCancel.disabled = false;
     }
   } else {
@@ -268,8 +274,15 @@ function changePanel(e) {
 
     button.className = 'answer-options__cancel btn';
     button.textContent = 'Отмена перехода';
-    button.disabled = true;
-    button.onclick = () => clearTimeout(localStorage.getItem('timerId'));
+    button.onclick = () => {
+      if (localStorage.getItem('timerId')) {
+        clearTimeout(localStorage.getItem('timerId'));
+        localStorage.removeItem('timerId');
+      } else {
+        localStorage.setItem('timerId', 'true');
+      }
+
+    };
 
     div.className = 'answer-options__finish-text';
     div.textContent = 'Это последний вопрос, переход будет выполнен автоматически, спустя 5 сек, после правильного ответа или после нажатия на кнопку, для отмены автоматического перехода, нажмите "Отмена перехода"';
