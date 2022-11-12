@@ -2,14 +2,19 @@ import birdsData from './birds';
 import url from '../images/empty-bird.jpg';
 import correct from '../sound/correct.mp3';
 import incorrect from '../sound/incorrect.mp3';
+import CreateAudioPlayer from './createAudioPlayer';
+import updateDurationSong from './updateDurationSong';
+
+const audioPlayer = new CreateAudioPlayer();
+const audioPlayer2 = new CreateAudioPlayer();
 
 export default function createQuiz(birds = birdsData) {
   const btnNext = document.getElementById('btn-next');
   const quiz = document.querySelector('.quiz-random-bird');
   quiz.innerHTML = '';
   const item = document.querySelector('.quiz-item');
-  const start = birds[0];
-  const shuffleStart = shuffle(start);
+  const startBirds = birds[0];
+  const shuffleStart = shuffle(startBirds);
   const obj = shuffleStart[0];
 
   const img = new Image();
@@ -23,35 +28,34 @@ export default function createQuiz(birds = birdsData) {
   li.className = 'quiz-random-bird__description';
   const li2 = li.cloneNode(true);
 
-  div.append(ul);
-  ul.append(li);
-  ul.append(li2);
-  createSound();
-
   const h3 = document.createElement('h3');
   h3.className = 'quiz-random-bird-name';
   const nameChars = obj.name.split('');
 
   h3.textContent = nameChars.map(() => '*').join('');
   h3.setAttribute('data-name', obj.name);
-  li.append(h3);
 
-  const divAudio = document.createElement('div');
+  const divAudio = audioPlayer.createAudio('quiz-random-bird');
   divAudio.className = 'quiz-random-bird__audio-player audio-player';
-  li2.append(divAudio);
 
-  const audio = document.createElement('audio');
+  const audio = divAudio.querySelector('audio');
   const urlAudio = obj.audio;
-  audio.className = 'audio-player__random';
+
   audio.src = urlAudio;
-  audio.controls = true;
 
-  divAudio.append(audio);
+  audio.onloadedmetadata = () => {
+    updateDurationSong(audioPlayer, divAudio, audio.duration);
+    createSound();
+    answer(startBirds);
 
-  quiz.append(img);
-  quiz.append(div);
+    divAudio.append(audio);
+    li.append(h3);
+    li2.append(divAudio);
+    ul.append(li, li2);
+    div.append(ul);
+    quiz.append(img, div);
+  };
 
-  answer(start);
   btnNext.addEventListener('click', changePanel);
 }
 
@@ -95,7 +99,13 @@ function checkAnswer(e) {
   if (e.target.textContent === quizName.dataset.name) {
     const item = document.querySelector('.quiz-item.active');
 
-    audio.load();
+    const divImgs = document.querySelectorAll('.play-pause.play-song');
+    divImgs.forEach((el) => {
+      if (el.classList.contains('quiz-random-bird__play-pause')) {
+        audioPlayer.playPause('', el);
+      } else audioPlayer2.playPause('', el);
+    });
+
     correct.load();
     correct.play();
     const bird = birdsArr.find(el => el.name === quizName.dataset.name);
@@ -108,6 +118,7 @@ function checkAnswer(e) {
     btnNext.disabled = false;
     liArray.forEach(el => el.removeEventListener('click', checkAnswer));
     liArray.forEach(el => el.addEventListener('click', withoutCheckAnswer));
+
     score();
 
     if (!item.nextElementSibling) {
@@ -124,6 +135,12 @@ function checkAnswer(e) {
     }
   } else {
     const bird = birdsArr.find(el => el.name === e.target.textContent);
+    const divImgs = document.querySelectorAll('.play-pause.play-song');
+    divImgs.forEach((el) => {
+      if (!el.classList.contains('quiz-random-bird__play-pause')) {
+        audioPlayer2.playPause('', el);
+      }
+    });
     description(bird, container);
     inCorrect.load();
     inCorrect.play();
@@ -157,19 +174,19 @@ function description(bird, container) {
   const divNameCont = document.createElement('div');
   const spanName = document.createElement('span');
   const spanNameSpecies = document.createElement('span');
-  const divAudio = document.createElement('div');
-  const audio = document.createElement('audio');
+
+  const divAudio = audioPlayer2.createAudio('details-bird-card');
+  const audio = divAudio.querySelector('audio');
 
   divNameCont.className = 'details-bird-card__name';
   spanName.className = 'details-bird-card__name-normal';
   spanNameSpecies.className = 'details-bird-card__name-species';
-  divAudio.className = 'details-bird-card__audio-player';
+  divAudio.className = 'details-bird-card__audio-player audio-player';
 
   spanName.textContent = bird.name;
   spanNameSpecies.textContent = bird.species;
 
   audio.src = bird.audio;
-  audio.controls = true;
 
   divAudio.append(audio);
   divCont.append(divNameCont);
@@ -188,6 +205,10 @@ function description(bird, container) {
   container.append(div);
   div.append(divInfo);
   div.append(divText);
+
+  audio.onloadedmetadata = () => {
+    updateDurationSong(audioPlayer2, divAudio, audio.duration);
+  };
 }
 
 function createSound() {
@@ -196,6 +217,7 @@ function createSound() {
   const audioCorrect = document.createElement('audio');
   audioCorrect.setAttribute('id', 'correct');
   audioCorrect.src = correct;
+  audioCorrect.volume = 0.5;
 
   const audioInCorrect = document.createElement('audio');
   audioInCorrect.setAttribute('id', 'inCorrect');
@@ -214,6 +236,13 @@ function changePanel(e) {
     window.location.hash = '#result';
     return;
   }
+
+  const divImgs = document.querySelectorAll('.play-pause.play-song');
+  divImgs.forEach((el) => {
+    if (el.classList.contains('quiz-random-bird__play-pause')) {
+      audioPlayer.playPause('', el);
+    } else audioPlayer2.playPause('', el);
+  });
 
   const { id } = item.nextElementSibling;
 
@@ -271,6 +300,13 @@ function withoutCheckAnswer(e) {
   const birdsArr = data[0];
   const container = document.querySelectorAll('.answer-options__container')[1];
   const bird = birdsArr.find(el => el.name === e.target.textContent);
+
+  const divImgs = document.querySelectorAll('.play-pause.play-song');
+  divImgs.forEach((el) => {
+    if (!el.classList.contains('quiz-random-bird__play-pause')) {
+      audioPlayer2.playPause('', el);
+    }
+  });
 
   description(bird, container);
 }
