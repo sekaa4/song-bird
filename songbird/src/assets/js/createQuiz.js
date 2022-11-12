@@ -17,6 +17,19 @@ export default function createQuiz(birds = birdsData) {
   const shuffleStart = shuffle(startBirds);
   const obj = shuffleStart[0];
 
+  const container = document.querySelectorAll('.answer-options__container')[1];
+  const p = document.createElement('p');
+  const span = document.createElement('span');
+  const span2 = document.createElement('span');
+
+  p.classList.add('answer-options__discription');
+  span.textContent = 'Послушайте плеер.';
+  span2.textContent = 'Выберите птицу из списка.';
+  p.append(span, span2);
+
+  container.innerHTML = '';
+  container.append(p);
+
   const img = new Image();
   img.className = 'quiz-random-bird__img img';
   img.src = url;
@@ -257,11 +270,17 @@ function changePanel(e) {
   const data = birdsData.slice(id);
 
   const container = document.querySelectorAll('.answer-options__container')[1];
+  const p = document.createElement('p');
+  const span = document.createElement('span');
+  const span2 = document.createElement('span');
+
+  p.classList.add('answer-options__discription');
+  span.textContent = 'Послушайте плеер.';
+  span2.textContent = 'Выберите птицу из списка.';
+  p.append(span, span2);
+
   container.innerHTML = '';
-  container.insertAdjacentHTML('afterbegin', `<p class="answer-options__discription">
-    <span span > Послушайте плеер.</span>
-      <span>Выберите птицу из списка</span>
-    </p >`);
+  container.append(p);
 
   btnNext.disabled = true;
 
