@@ -1,0 +1,30 @@
+.play-pause {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../icons/play.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.play-song {
+  background-image: url("../../icons/pause.svg");
+}
+
+.volume {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../icons/speaker-high.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.volume-slash {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../icons/speaker-slash.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
