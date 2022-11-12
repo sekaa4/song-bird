@@ -1,43 +1,6 @@
 .main {
   padding: 40px 0;
+  flex: auto;
 }
 .main__wrapper {
-}
-
-.main__content {
-  border-radius: 15px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url("../../images/fon.jpg");
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3%;
-}
-
-.main__title {
-  text-align: center;
-}
-
-.main__text {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.main__button {
-  display: block;
-  @include font(1.6rem, 0.8, 500);
-  margin: 0 auto;
-  min-width: 200px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: #919191;
-}
-
-.main__list {
-  @include font(1.6rem, 1.4, 500);
-  list-style: disc;
-  padding-bottom: 10px;
-  &:last-child {
-    padding-bottom: 15%;
-  }
 }
