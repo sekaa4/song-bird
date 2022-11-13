@@ -45,6 +45,8 @@ export default function createQuiz(birds, language) {
   const div = document.createElement('div');
   const ul = document.createElement('ul');
   const li = document.createElement('li');
+  div.className = 'quiz-random-bird__info';
+  ul.className = 'quiz-random-bird__content';
   li.className = 'quiz-random-bird__description';
   const li2 = li.cloneNode(true);
 
