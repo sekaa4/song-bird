@@ -1,4 +1,6 @@
-export default function createResult() {
+import { languages } from './languages';
+
+export default function createResult(lang) {
   const app = document.getElementById('app');
   const result = localStorage.getItem('saveResult');
   const div = document.createElement('div');
@@ -15,24 +17,31 @@ export default function createResult() {
   pLose.className = 'result-page__text';
   button.className = 'result-page__button';
 
+  h1Win.setAttribute('data-lang', 'h1Win');
+  h1Lose.setAttribute('data-lang', 'h1Lose');
+  pWin.setAttribute('data-lang', 'pWin');
+  pLose.setAttribute('data-lang', 'pLose');
+  button.setAttribute('data-lang', 'buttonResult');
+
   button.onclick = () => {
+    localStorage.removeItem('timerId');
     window.location.hash = '#quiz';
   };
 
   if (!result) {
     h1Lose.className = 'result-page__title';
-    h1Lose.textContent = 'Вы ещё не проходили Викторину, вы можете это сделать прямо сейчас';
-    button.textContent = 'Начать Викторину';
+    h1Lose.textContent = languages[lang].h1Lose;
+    button.textContent = languages[lang].buttonResult;
     div.append(h1Lose, button);
     app.append(div);
 
     return;
   }
 
-  h1Win.textContent = 'Поздравляем!';
-  pWin.textContent = `Вы прошли викторину и набрали ${result} из 30 возможных баллов`;
-  pLose.textContent = `Вы прошли викторину и набрали ${result} из 30 возможных баллов, но могло бы быть и лучше, можете попробовать пройти Викторину ещё раз, теперь это будет сделать проще! Удачи!`;
-  button.textContent = 'Начать Викторину';
+  h1Win.textContent = languages[lang].h1Win;
+  pWin.textContent = languages[lang].pWin();
+  pLose.textContent = languages[lang].pLose();
+  button.textContent = languages[lang].buttonResult;
 
   app.append(div);
 

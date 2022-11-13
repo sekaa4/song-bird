@@ -1,14 +1,16 @@
 import birdsData from './birds';
+import birdsDataEn from './birds-en';
 import url from '../images/empty-bird.jpg';
 import correct from '../sound/correct.mp3';
 import incorrect from '../sound/incorrect.mp3';
 import CreateAudioPlayer from './createAudioPlayer';
 import updateDurationSong from './updateDurationSong';
+import { languages } from './languages';
 
 const audioPlayer = new CreateAudioPlayer();
 const audioPlayer2 = new CreateAudioPlayer();
 
-export default function createQuiz(birds = birdsData) {
+export default function createQuiz(birds, language) {
   const btnNext = document.getElementById('btn-next');
   const quiz = document.querySelector('.quiz-random-bird');
   quiz.innerHTML = '';
@@ -17,14 +19,19 @@ export default function createQuiz(birds = birdsData) {
   const shuffleStart = shuffle(startBirds);
   const obj = shuffleStart[0];
 
-  const container = document.querySelectorAll('.answer-options__container')[1];
+  const container = document.querySelector('.answer-options__container.container-description');
   const p = document.createElement('p');
   const span = document.createElement('span');
   const span2 = document.createElement('span');
 
+  span.setAttribute('data-lang', 'spanListen');
+  span2.setAttribute('data-lang', 'spanChoose');
+
   p.classList.add('answer-options__discription');
-  span.textContent = 'Послушайте плеер.';
-  span2.textContent = 'Выберите птицу из списка.';
+
+  span.textContent = languages[language].spanListen;
+  span2.textContent = languages[language].spanChoose;
+
   p.append(span, span2);
 
   container.innerHTML = '';
@@ -103,11 +110,15 @@ function checkAnswer(e) {
   const item = document.querySelector('.quiz-item.active');
   const audio = document.querySelector('.audio-player__random');
   const { id } = item;
-  const data = birdsData.slice(id);
+
+  const language = document.querySelector('.language.nav__language');
+  const lang = language.value;
+
+  const data = lang === 'ru' ? birdsData.slice(id) : birdsDataEn.slice(id);
 
   const birdsArr = data[0];
   const img = document.querySelector('.quiz-random-bird__img');
-  const container = document.querySelectorAll('.answer-options__container')[1];
+  const container = document.querySelector('.answer-options__container.container-description');
 
   if (e.target.textContent === quizName.dataset.name) {
     const item = document.querySelector('.quiz-item.active');
@@ -160,6 +171,7 @@ function checkAnswer(e) {
         audioPlayer2.playPause('', el);
       }
     });
+
     description(bird, container);
     inCorrect.load();
     inCorrect.play();
@@ -267,16 +279,26 @@ function changePanel(e) {
 
   item.classList.remove('active');
   item.nextElementSibling.classList.add('active');
-  const data = birdsData.slice(id);
 
-  const container = document.querySelectorAll('.answer-options__container')[1];
+  const language = document.querySelector('.language.nav__language');
+  const lang = language.value;
+
+  const data = lang === 'ru' ? birdsData.slice(id) : birdsDataEn.slice(id);
+
+  const container = document.querySelector('.answer-options__container.container-description');
   const p = document.createElement('p');
   const span = document.createElement('span');
   const span2 = document.createElement('span');
 
+
+  span.setAttribute('data-lang', 'spanListen');
+  span2.setAttribute('data-lang', 'spanChoose');
+
   p.classList.add('answer-options__discription');
-  span.textContent = 'Послушайте плеер.';
-  span2.textContent = 'Выберите птицу из списка.';
+
+  span.textContent = languages[lang].spanListen;
+  span2.textContent = languages[lang].spanChoose;
+
   p.append(span, span2);
 
   container.innerHTML = '';
@@ -292,7 +314,9 @@ function changePanel(e) {
     const button = document.createElement('button');
 
     button.className = 'answer-options__cancel btn';
-    button.textContent = 'Отмена перехода';
+    button.textContent = languages[lang].cancelButton;
+
+    button.setAttribute('data-lang', 'cancelButton');
     button.onclick = () => {
       if (localStorage.getItem('timerId')) {
         clearTimeout(localStorage.getItem('timerId'));
@@ -304,14 +328,19 @@ function changePanel(e) {
     };
 
     div.className = 'answer-options__finish-text';
-    div.textContent = 'Это последний вопрос, переход будет выполнен автоматически, спустя 5 сек, после правильного ответа или после нажатия на кнопку, для отмены автоматического перехода, нажмите "Отмена перехода"';
+    div.setAttribute('data-lang', 'finishText');
+    div.textContent = languages[lang].finishText;
 
     divButton.append(button);
     divButton.append(div);
-    btnNext.textContent = 'Завершить Викторину';
+
+    btnNext.setAttribute('data-lang', 'finish');
+
+    btnNext.textContent = languages[lang].finish;
   }
 
-  createQuiz(data);
+
+  createQuiz(data, lang);
 }
 
 function score() {
@@ -328,9 +357,14 @@ function withoutCheckAnswer(e) {
   const item = document.querySelector('.quiz-item.active');
 
   const { id } = item;
-  const data = birdsData.slice(id);
+
+  const language = document.querySelector('.language.nav__language');
+  const lang = language.value;
+
+  const data = lang === 'ru' ? birdsData.slice(id) : birdsDataEn.slice(id);
+
   const birdsArr = data[0];
-  const container = document.querySelectorAll('.answer-options__container')[1];
+  const container = document.querySelector('.answer-options__container.container-description');
   const bird = birdsArr.find(el => el.name === e.target.textContent);
 
   const divImgs = document.querySelectorAll('.play-pause.play-song');
