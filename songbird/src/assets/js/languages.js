@@ -30,7 +30,7 @@ export const languages = {
     spanChoose: 'Select a bird from the list.',
     cancelButton: 'Cancel',
     finish: 'Complete the Quiz',
-    finishText: 'This is the last question, the transition will be performed automatically, after 5 seconds, after the correct answer or after pressing the button, to cancel the automatic transition, click "Cancel transition"',
+    finishText: 'This is the last question, the transition will be performed automatically, after 5 seconds, after the correct answer or after pressing the button, to cancel the automatic transition, click "Cancel"',
 
     h1Win: 'Congratulations!',
     h1Lose: `You haven't taken the Quiz yet, you can do it right now`,
