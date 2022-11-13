@@ -66,16 +66,18 @@ export default function createQuiz(birds, language) {
 
   audio.onloadedmetadata = () => {
     updateDurationSong(audioPlayer, divAudio, audio.duration);
-    createSound();
-    answer(startBirds);
 
-    divAudio.append(audio);
-    li.append(h3);
-    li2.append(divAudio);
-    ul.append(li, li2);
-    div.append(ul);
-    quiz.append(img, div);
   };
+
+  createSound();
+  answer(startBirds);
+
+  divAudio.append(audio);
+  li.append(h3);
+  li2.append(divAudio);
+  ul.append(li, li2);
+  div.append(ul);
+  quiz.append(img, div);
 
   btnNext.addEventListener('click', changePanel);
 }
@@ -159,7 +161,6 @@ function checkAnswer(e) {
         timerId = setTimeout(() => window.location.hash = '#result', 5000);
         localStorage.setItem('timerId', timerId);
       }
-
 
       localStorage.setItem('saveResult', score.innerHTML);
       if (buttonCancel) buttonCancel.disabled = false;
@@ -261,7 +262,6 @@ function createSound() {
 
 function changePanel(e) {
   const item = document.querySelector('.quiz-item.active');
-  const main = document.getElementById('app');
   const btnNext = document.getElementById('btn-next');
 
   if (!item.nextElementSibling) {
@@ -290,7 +290,6 @@ function changePanel(e) {
   const p = document.createElement('p');
   const span = document.createElement('span');
   const span2 = document.createElement('span');
-
 
   span.setAttribute('data-lang', 'spanListen');
   span2.setAttribute('data-lang', 'spanChoose');
@@ -339,7 +338,6 @@ function changePanel(e) {
 
     btnNext.textContent = languages[lang].finish;
   }
-
 
   createQuiz(data, lang);
 }
