@@ -97,9 +97,9 @@ function answer(start) {
     li.className = 'answer-options__item';
     span.className = 'radio-btn';
     li.textContent = start[i].name;
-    li.addEventListener('click', checkAnswer);
-    li.prepend(span);
 
+    li.prepend(span);
+    li.addEventListener('click', checkAnswer);
     ul.append(li);
   }
 }
@@ -123,7 +123,7 @@ function checkAnswer(e) {
   const img = document.querySelector('.quiz-random-bird__img');
   const container = document.querySelector('.answer-options__container.container-description');
 
-  if (e.target.textContent === quizName.dataset.name) {
+  if (e.currentTarget.textContent === quizName.dataset.name) {
     const item = document.querySelector('.quiz-item.active');
 
     const divImgs = document.querySelectorAll('.play-pause.play-song');
@@ -141,7 +141,7 @@ function checkAnswer(e) {
     img.src = bird.image;
     quizName.textContent = quizName.dataset.name;
 
-    e.target.firstElementChild.classList.add('correct');
+    e.currentTarget.firstElementChild.classList.add('correct');
     btnNext.disabled = false;
     liArray.forEach(el => el.removeEventListener('click', checkAnswer));
     liArray.forEach(el => el.addEventListener('click', withoutCheckAnswer));
@@ -166,7 +166,7 @@ function checkAnswer(e) {
       if (buttonCancel) buttonCancel.disabled = false;
     }
   } else {
-    const bird = birdsArr.find(el => el.name === e.target.textContent);
+    const bird = birdsArr.find(el => el.name === e.currentTarget.textContent);
     const divImgs = document.querySelectorAll('.play-pause.play-song');
     divImgs.forEach((el) => {
       if (!el.classList.contains('quiz-random-bird__play-pause')) {
@@ -177,7 +177,7 @@ function checkAnswer(e) {
     description(bird, container);
     inCorrect.load();
     inCorrect.play();
-    e.target.firstElementChild.classList.add('error');
+    e.currentTarget.firstElementChild.classList.add('error');
   }
 }
 
@@ -366,7 +366,7 @@ function withoutCheckAnswer(e) {
 
   const birdsArr = data[0];
   const container = document.querySelector('.answer-options__container.container-description');
-  const bird = birdsArr.find(el => el.name === e.target.textContent);
+  const bird = birdsArr.find(el => el.name === e.currentTarget.textContent);
 
   const divImgs = document.querySelectorAll('.play-pause.play-song');
   divImgs.forEach((el) => {
