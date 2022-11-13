@@ -52,9 +52,8 @@ export default function createQuiz(birds, language) {
 
   const h3 = document.createElement('h3');
   h3.className = 'quiz-random-bird-name';
-  const nameChars = obj.name.split('');
 
-  h3.textContent = nameChars.map(() => '*').join('');
+  h3.textContent = '********';
   h3.setAttribute('data-name', obj.name);
 
   const divAudio = audioPlayer.createAudio('quiz-random-bird');
