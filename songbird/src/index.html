@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <title>SongBird</title>
+    <title data-lang="titleName">Пение птиц</title>
   </head>
 
   <body>
@@ -19,17 +19,21 @@
         <nav class="header__navigation">
           <ul class="nav">
             <li class="nav__link">
-              <a href="#about" class="link link__about">About</a>
+              <a href="#about" class="link link__about" data-lang="linkAbout">Об Викторине</a>
             </li>
             <li class="nav__link">
-              <a href="#quiz" class="link link__quiz">Quiz</a>
+              <a href="#quiz" class="link link__quiz" data-lang="linkQuiz">Викторина</a>
             </li>
             <li class="nav__link">
-              <a href="#result" class="link link__result">Result</a>
+              <a href="#result" class="link link__result" data-lang="linkResult">Результат</a>
             </li>
             <li class="nav__link">
-              <a href="#gallery" class="link link__gallery">Gallery</a>
+              <a href="#gallery" class="link link__gallery" data-lang="linkGallery">Галлерея</a>
             </li>
+            <select id="language" size="1" class="language nav__language">
+              <option class="option language__en" value="en" label="En">En</option>
+              <option class="option language__ru" value="ru" label="Ru" selected>Ru</option>
+            </select>
           </ul>
         </nav>
       </div>
@@ -48,7 +52,7 @@
         <div class="footer__creator">
           <a href="https://github.com/sekaa4" class="footer__designed designed">
             <span class="designed__img"></span>
-            <span class="designed__text">©Digital 2022</span>
+            <span class="designed__text" data-lang="digital">©Digital 2022</span>
           </a>
         </div>
       </div>
