@@ -14,7 +14,6 @@ export default function createQuiz(birds, language) {
   const btnNext = document.getElementById('btn-next');
   const quiz = document.querySelector('.quiz-random-bird');
   quiz.innerHTML = '';
-  const item = document.querySelector('.quiz-item');
   const startBirds = birds[0];
   const shuffleStart = shuffle(startBirds);
   const obj = shuffleStart[0];
@@ -111,7 +110,6 @@ function checkAnswer(e) {
   const btnNext = document.getElementById('btn-next');
   const liArray = document.querySelectorAll('.answer-options__item');
   const item = document.querySelector('.quiz-item.active');
-  const audio = document.querySelector('.audio-player__random');
   const { id } = item;
 
   const language = document.querySelector('.language.nav__language');

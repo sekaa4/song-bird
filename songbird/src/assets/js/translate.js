@@ -42,7 +42,6 @@ export default function translate(lang) {
       }
 
       if (!document.querySelector('.answer-options__discription')) {
-        console.log('tut');
         spanName.textContent = bird.name;
         spanNameSpecies.textContent = bird.species;
         spanText.textContent = bird.description;
