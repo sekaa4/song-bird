@@ -10,6 +10,8 @@ export default function createResult(lang) {
   const pLose = document.createElement('p');
   const button = document.createElement('button');
 
+  languages.result = localStorage.getItem('saveResult');
+
   div.className = 'result-page';
   h1Win.className = 'result-page__title';
   h1Lose.className = 'result-page__title';

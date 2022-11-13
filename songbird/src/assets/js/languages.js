@@ -35,10 +35,10 @@ export const languages = {
     h1Win: 'Congratulations!',
     h1Lose: `You haven't taken the Quiz yet, you can do it right now`,
     pWin() {
-      return `You passed the quiz and scored ${localStorage.getItem('saveResult')}`;
+      return `You passed the quiz and scored ${languages.result}`;
     },
     pLose() {
-      return `You passed the quiz and scored ${localStorage.getItem('saveResult')} out of 30 possible points, but it could have been better, you can try to take the Quiz again, now it will be easier to do it! Good luck!`;
+      return `You passed the quiz and scored ${languages.result} out of 30 possible points, but it could have been better, you can try to take the Quiz again, now it will be easier to do it! Good luck!`;
     },
     buttonResult: 'Start the Quiz',
   },
@@ -77,10 +77,10 @@ export const languages = {
     h1Win: 'Поздравляем!',
     h1Lose: 'Вы ещё не проходили Викторину, вы можете это сделать прямо сейчас',
     pWin() {
-      return `Вы прошли викторину и набрали ${localStorage.getItem('saveResult')}`;
+      return `Вы прошли викторину и набрали ${languages.result}`;
     },
     pLose() {
-      return `Вы прошли викторину и набрали ${localStorage.getItem('saveResult')} из 30 возможных баллов, но могло бы быть и лучше, можете попробовать пройти Викторину ещё раз, теперь это будет сделать проще! Удачи!`;
+      return `Вы прошли викторину и набрали ${languages.result} из 30 возможных баллов, но могло бы быть и лучше, можете попробовать пройти Викторину ещё раз, теперь это будет сделать проще! Удачи!`;
     },
     buttonResult: 'Начать Викторину',
   },

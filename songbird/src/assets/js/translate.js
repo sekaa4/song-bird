@@ -9,6 +9,10 @@ export default function translate(lang) {
       elem.firstChild.data = languages[lang][elem.dataset.lang];
       return;
     }
+    if (elem.dataset.lang === 'pWin' || elem.dataset.lang === 'pLose') {
+      elem.textContent = languages[lang][elem.dataset.lang]();
+      return;
+    }
     elem.textContent = languages[lang][elem.dataset.lang];
   });
 
