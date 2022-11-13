@@ -265,6 +265,8 @@ function changePanel(e) {
   const btnNext = document.getElementById('btn-next');
 
   if (!item.nextElementSibling) {
+    clearTimeout(localStorage.getItem('timerId'));
+    localStorage.removeItem('timerId');
     window.location.hash = '#result';
     return;
   }
