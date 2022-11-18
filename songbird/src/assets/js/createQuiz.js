@@ -65,10 +65,12 @@ export default function createQuiz(birds, language) {
 
   audio.onloadedmetadata = () => {
     updateDurationSong(audioPlayer, divAudio, audio.duration);
-
   };
 
-  createSound();
+  if (!document.getElementById('correct')) {
+    createSound();
+  }
+
   answer(startBirds);
 
   divAudio.append(audio);
