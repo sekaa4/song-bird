@@ -60,12 +60,46 @@ Router.prototype = {
           scope.rootElem.innerHTML = this.responseText;
           translate(lang);
           if (window.location.hash === '#quiz') {
+            const nav = document.querySelector('.nav');
+            const active = nav.querySelector('.active');
+            if (!active) {
+              nav.querySelectorAll('.nav__link')[1].classList.toggle('active');
+            } else {
+              active.classList.toggle('active');
+              nav.querySelectorAll('.nav__link')[1].classList.toggle('active');
+            }
             lang === 'ru' ? createQuiz(birdsData, lang) : createQuiz(birdsDataEn, lang);
           }
-          if (window.location.hash === '#about') {
+          if (window.location.hash === '#about' || window.location.hash === '') {
+            const nav = document.querySelector('.nav');
+            const active = nav.querySelector('.active');
+            if (!active) {
+              nav.querySelectorAll('.nav__link')[0].classList.toggle('active');
+            } else {
+              active.classList.toggle('active');
+              nav.querySelectorAll('.nav__link')[0].classList.toggle('active');
+            }
           }
           if (window.location.hash === '#result') {
+            const nav = document.querySelector('.nav');
+            const active = nav.querySelector('.active');
+            if (!active) {
+              nav.querySelectorAll('.nav__link')[2].classList.toggle('active');
+            } else {
+              active.classList.toggle('active');
+              nav.querySelectorAll('.nav__link')[2].classList.toggle('active');
+            }
             createResult(lang);
+          }
+          if (window.location.hash === '#gallery') {
+            const nav = document.querySelector('.nav');
+            const active = nav.querySelector('.active');
+            if (!active) {
+              nav.querySelectorAll('.nav__link')[3].classList.toggle('active');
+            } else {
+              active.classList.toggle('active');
+              nav.querySelectorAll('.nav__link')[3].classList.toggle('active');
+            }
           }
         }
       };

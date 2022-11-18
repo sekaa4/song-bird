@@ -18,3 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
     language.value = lang;
   }
 });
+
+const links = document.querySelectorAll('.nav__link');
+links.forEach(link => {
+  if (link.closest('.language')) {
+    return;
+  }
+  link.onclick = (e) => {
+    const nav = document.querySelector('.nav');
+    const active = nav.querySelector('.active');
+    active.classList.toggle('active');
+    e.currentTarget.classList.toggle('active');
+  };
+});
