@@ -19,8 +19,18 @@
 }
 
 .footer__designed {
+  @extend %transition;
   display: flex;
   align-items: center;
+  color: $color-white;
+
+  &:hover {
+    color: #008966;
+  }
+}
+
+.designed__text {
+  color: inherit;
 }
 
 .designed__img {

@@ -1,6 +1,5 @@
 .header {
-  height: 80px;
-  padding-top: 25px;
+  padding-top: 15px;
 }
 
 .header__wrapper {
@@ -10,9 +9,22 @@
 }
 
 .header__logo {
+  @extend %transition;
   min-width: 200px;
   height: 55px;
   background-size: cover;
   background-image: url("../../logo/logo.svg");
   background-repeat: no-repeat;
+
+  @include media-tablet {
+    background-size: contain;
+    min-width: 145px;
+    height: 40px;
+  }
+
+  @include media-mobile {
+    background-image: url("../../logo/birds.svg");
+    min-width: 135px;
+    height: 100px;
+  }
 }

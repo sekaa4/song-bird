@@ -1,3 +1,8 @@
+.audio-player {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .play-pause {
   display: inline-block;
   width: 40px;
@@ -27,4 +32,44 @@
   background-image: url("../../icons/speaker-slash.svg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.volume-line {
+  @extend %transition;
+  width: 20rem;
+
+  @include media-tablet {
+    width: 12rem;
+  }
+
+  @include media-mobile {
+    width: 10rem;
+  }
+
+  @include media-small-mobile {
+    width: 12rem;
+  }
+}
+
+.progress-line {
+  width: calc(100% - 55px);
+}
+
+.play-pause {
+  margin-right: 15px;
+}
+
+.bird__time {
+  margin-top: 5px;
+  padding-left: 5rem;
+  font-size: 1.2rem;
+  width: 100%;
+  color: $color-white;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.volume {
+  margin-right: 15px;
 }

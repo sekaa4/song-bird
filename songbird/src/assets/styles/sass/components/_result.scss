@@ -1,0 +1,30 @@
+.result-page {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  background-color: #555;
+  max-width: 100%;
+  padding: 50px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  color: #008966;
+}
+
+.result-page__title {
+  max-width: 100%;
+  @include font(3.4rem, 1.4, 700);
+
+  padding: 0;
+  margin: 0 auto;
+}
+
+.result-page__text {
+  @include font(2.5rem, 1.2, 500);
+  text-align: center;
+  max-width: 100%;
+  margin: 40px auto;
+}
+
+.result-page__btn {
+  margin-top: 80px;
+}

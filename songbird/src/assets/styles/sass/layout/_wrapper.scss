@@ -1,5 +1,17 @@
 .wrapper {
-  position: relatiive;
+  position: relative;
   max-width: $content-width;
   margin: 0 auto;
+
+  @include media-tablet {
+    max-width: 680px;
+  }
+
+  @include media-mobile {
+    max-width: 550px;
+  }
+
+  @include media-small-mobile {
+    max-width: 410px;
+  }
 }

@@ -1,3 +1,13 @@
 .img {
-  height: 130px;
+  display: block;
+  width: 200px;
+  height: 155px;
+  border-radius: 10px;
+  object-fit: cover;
+
+  @include media-mobile {
+    width: 170px;
+    height: 130px;
+    border-radius: 8px;
+  }
 }

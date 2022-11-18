@@ -4,71 +4,247 @@
 }
 
 .quiz-title__text {
-  justify-content: flex-end;
+  justify-content: center;
   display: flex;
+  color: $color-white;
   width: 100%;
 }
 
 .quiz-list {
+  @extend %transition;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
   margin: 10px 0;
+  border-radius: 0.5em;
+  overflow: hidden;
 }
 
 .quiz-item {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
-  text-align: center;
+  flex-shrink: 0;
+  flex-basis: 5em;
+  white-space: nowrap;
+  color: $color-white;
+  background-color: #008966;
+  border-color: #008966;
+  user-select: none;
+  height: 2em;
+
+  &:hover {
+    background-color: #105342;
+    border-color: #105342;
+  }
+
+  @include media-tablet {
+    flex-basis: 10em;
+  }
 }
 
 .quiz-random-bird {
   display: flex;
   width: 100%;
-  height: 130px;
   background-color: #303030;
+  border-radius: 1rem;
+  padding: 1.5rem;
   margin-bottom: 20px;
+
+  @include media-small-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
+.quiz-random-bird__info {
+  width: 100%;
+  padding: 0 4rem;
+
+  @include media-small-mobile {
+    padding: 0;
+  }
+}
+
+.quiz-random-bird__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.quiz-random-bird__description {
+  vertical-align: middle;
+  width: 100%;
+
+  @include media-small-mobile {
+    text-align: center;
+  }
+}
+
+.quiz-random-bird-name {
+  line-height: 1.8;
+}
+
+.quiz-random-bird__progress-line {
+  width: calc(100% - 55px);
+}
+
+.quiz-random-bird__time {}
 
 .answer-options {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  column-gap: 20px;
   justify-content: space-between;
+  border-radius: 10px;
+  overflow: hidden;
 }
+
+.answer-options__list {
+  border-radius: 10px;
+  border: 1px solid #555;
+  overflow: hidden;
+  width: 100%;
+}
+
+.answer-options__item {
+  position: relative;
+  cursor: pointer;
+  padding: 1.1rem 1.2rem;
+  background-color: #141313;
+  border: 1px solid #555;
+  width: 100%;
+  color: $color-white;
+  user-select: none;
+
+  &:hover {
+    background-color: #555;
+  }
+
+  @include media-tablet {
+    padding: 2.9rem 1.2rem;
+  }
+
+}
+
 .answer-options__container {
   position: relative;
   display: inline-flex;
-  max-width: 49%;
+  max-width: 50%;
   flex-grow: 1;
-  padding-right: 15px;
-  padding-left: 15px;
   background-color: #303030;
+  padding: 1.5rem 1.2rem;
+}
+
+.answer-options__container:first-child {
+  border-bottom-left-radius: 10px;
+
+  @include media-tablet {
+    max-width: 38%;
+  }
+}
+
+.container-description {
+  border-bottom-right-radius: 10px;
+
+  @include media-tablet {
+    max-width: 62%;
+  }
 }
 
 .radio-btn {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  margin-right: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
-  border: 1px solid #555;
+  border: 1px solid #303030;
   background-color: #303030;
 }
 
-.answer-options__item {
-  cursor: pointer;
-  user-select: none;
+.answer-options__discription {
+  display: flex;
+  color: $color-white;
+  flex-direction: column;
+  row-gap: 1rem;
+  @include font(1.6rem, 1.4, 500);
+}
+
+.details-bird-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: $color-white;
+}
+
+.details-bird-card__container {
+  display: flex;
+
+  @include media-tablet {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.details-bird-card__info {
+  width: 68%;
+  padding: 0 2rem;
+
+  @include media-tablet {
+    width: 100%;
+  }
+}
+
+.details-bird-card__name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: $color-white;
+  margin: 10px 0;
+
+  @include media-tablet {
+    align-items: center;
+  }
+}
+
+.details-bird-card__container-text {
+  margin-top: 10px;
+}
+
+.details-bird-card__volume-line {
+  @extend %transition;
+  width: 45%;
+
+  @include media-tablet {
+    width: 40%;
+  }
 }
 
 .button-container {
   width: 100%;
-  margin: 25px 15px;
-  background-color: #303030;
+  margin-top: 20px;
+}
+
+.answer-options__cancel {
+  &:hover {
+    background-color: #008966;
+    color: $color-white;
+  }
+}
+
+.answer-options__finish-text {
+  text-align: center;
+  padding: 15px 135px 0;
+  color: #008966;
+
+  @include media-tablet {
+    padding: 15px 15px 0;
+  }
 }
 
 .error {
-  background-color: red;
+  background-color: rgb(133, 11, 11);
 }
 
 .correct {
@@ -77,4 +253,5 @@
 
 .active {
   background-color: #303030;
+  pointer-events: none;
 }

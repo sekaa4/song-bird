@@ -8,6 +8,10 @@ body {
   display: flex;
   flex-direction: column;
   background-color: $color-main;
+
+  @include media-mobile {
+    @include font(1.4rem, 1.25, 500);
+  }
 }
 
 h1 {
@@ -26,4 +30,11 @@ h3 {
 
 p {
   @include font(1.8rem, 0.8, 500);
+}
+
+select {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  font-style: inherit;
 }

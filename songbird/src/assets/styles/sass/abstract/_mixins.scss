@@ -4,3 +4,21 @@
   font-weight: $weight;
   font-style: $style;
 }
+
+@mixin media-tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: 580px) {
+    @content;
+  }
+}
+
+@mixin media-small-mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}

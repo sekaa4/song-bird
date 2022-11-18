@@ -17,7 +17,7 @@ export default function createResult(lang) {
   h1Lose.className = 'result-page__title';
   pWin.className = 'result-page__text';
   pLose.className = 'result-page__text';
-  button.className = 'result-page__button';
+  button.className = 'result-page__btn btn';
 
   h1Win.setAttribute('data-lang', 'h1Win');
   h1Lose.setAttribute('data-lang', 'h1Lose');
