@@ -11,10 +11,12 @@ export default class createAudioPlayer {
     const divImgVol = document.createElement('div');
     const inputLine = document.createElement('input');
     const inputVolume = document.createElement('input');
+    const divTime = document.createElement('div');
     const divCurrentTime = document.createElement('div');
     const divDurationTime = document.createElement('div');
 
     audio.className = `audio ${classNamePrefix}__audio`;
+    audio.preload = 'metadata';
     audio.volume = 0.3;
 
     divImg.className = `play-pause ${classNamePrefix}__play-pause`;
@@ -27,7 +29,7 @@ export default class createAudioPlayer {
     inputLine.min = '0';
     inputLine.value = '0';
     inputLine.className = `progress-line ${classNamePrefix}__progress-line`;
-    inputLine.onchange = this.changeProgressBar;
+    inputLine.oninput = this.changeProgressBar;
 
     inputVolume.type = 'range';
     inputVolume.min = '0';
@@ -39,9 +41,14 @@ export default class createAudioPlayer {
 
     divCurrentTime.className = `current-time ${classNamePrefix}__current-time`;
     divDurationTime.className = `duration-time ${classNamePrefix}__duration-time`;
+    divCurrentTime.hidden = true;
+    divDurationTime.hidden = true;
+    divTime.prepend('Loading...');
+    divTime.className = `${classNamePrefix}__time bird__time`;
 
-    divMain.append(audio, divImg, inputLine, divImgVol, inputVolume);
-    divMain.append(divCurrentTime, divDurationTime);
+    divTime.append(divCurrentTime, divDurationTime);
+    divMain.append(audio, divImg, inputLine, divTime);
+    divMain.append(divImgVol, inputVolume);
     return divMain;
   }
 

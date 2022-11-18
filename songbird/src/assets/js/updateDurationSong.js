@@ -19,6 +19,12 @@ export default function updateDurationSong(audioPlayer, elem, duration) {
     audioPlayer.playPause('', divImg);
   }
 
+  if (currentTime.previousSibling) {
+    currentTime.previousSibling.remove();
+  }
+  currentTime.hidden = false;
+  durationTime.hidden = false;
+
   setTimeout(updateDurationSong, 500, audioPlayer, elem, duration);
 }
 
