@@ -325,6 +325,7 @@ function changePanel(e) {
         localStorage.setItem('timerId', 'true');
       }
 
+      button.classList.add('active');
     };
 
     div.className = 'answer-options__finish-text';
