@@ -1,5 +1,6 @@
 import createQuiz from './createQuiz';
 import createResult from './createResult';
+import createGallery from './createGallery';
 import translate from './translate';
 import birdsData from './birds';
 import birdsDataEn from './birds-en';
@@ -100,6 +101,7 @@ Router.prototype = {
               active.classList.toggle('active');
               nav.querySelectorAll('.nav__link')[3].classList.toggle('active');
             }
+            createGallery(lang);
           }
         }
       };
