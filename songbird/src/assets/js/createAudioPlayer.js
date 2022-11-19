@@ -56,6 +56,21 @@ export default class createAudioPlayer {
     elem = e ? e.target : elem;
     const audio = elem.parentElement.querySelector('.audio');
 
+    if (window.location.hash === '#gallery') {
+      const playBirds = document.querySelectorAll('.play-pause.play-song');
+
+      if (playBirds.length !== 0) {
+        playBirds.forEach(bird => {
+          if (bird !== e.target) {
+            const audio = bird.parentElement.querySelector('.audio');
+            bird.classList.toggle('play-song');
+            audio.pause();
+            this.isPlay = false;
+          }
+        });
+      }
+    }
+
     if (this.isPlay) {
       elem.classList.toggle('play-song');
       audio.pause();
