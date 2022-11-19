@@ -65,4 +65,17 @@ export default function translate(lang) {
       }
     }
   }
+
+  if (window.location.hash === '#gallery' && document.querySelector('.details-bird-card__name-normal')) {
+    const data = lang === 'ru' ? birdsData.flat() : birdsDataEn.flat();
+    console.log(data);
+    const cardsBirds = document.querySelectorAll('.gallery-bird-card');
+    console.log(cardsBirds);
+
+    for (let i = 0; i < data.length; i++) {
+      cardsBirds[i].querySelector('.details-bird-card__name-normal').textContent = data[i].name;
+      cardsBirds[i].querySelector('.details-bird-card__name-species').textContent = data[i].species;
+      cardsBirds[i].querySelector('.details-bird-card__text-content').textContent = data[i].description;
+    }
+  }
 }
