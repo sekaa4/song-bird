@@ -10,6 +10,12 @@
   background-image: url("../../icons/play.svg");
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: 5px;
+    box-shadow: 0px 1px 8px 4px rgba(0, 137, 102, 0.8);
+  }
 }
 
 .play-song {
@@ -23,6 +29,12 @@
   background-image: url("../../icons/speaker-high.svg");
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: 5px;
+    box-shadow: 0px 1px 8px 4px rgba(0, 137, 102, 0.8);
+  }
 }
 
 .volume-slash {
@@ -38,6 +50,17 @@
   @extend %transition;
   width: 20rem;
 
+  align-self: center;
+  height: 4px;
+  border-radius: 5px;
+  accent-color: #008966;
+  cursor: pointer;
+  border-color: #008966;
+
+  &:hover {
+    accent-color: #008966;
+  }
+
   @include media-tablet {
     width: 12rem;
   }
@@ -52,7 +75,17 @@
 }
 
 .progress-line {
+  align-self: center;
   width: calc(100% - 55px);
+  height: 4px;
+  border-radius: 5px;
+  accent-color: #008966;
+  cursor: pointer;
+  border-color: #008966;
+
+  &:hover {
+    accent-color: #008966;
+  }
 }
 
 .play-pause {
