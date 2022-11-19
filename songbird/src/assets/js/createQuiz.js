@@ -4,6 +4,7 @@ import url from '../images/empty-bird.jpg';
 import correct from '../sound/correct.mp3';
 import incorrect from '../sound/incorrect.mp3';
 import CreateAudioPlayer from './createAudioPlayer';
+import description from './description';
 import updateDurationSong from './updateDurationSong';
 import { languages } from './languages';
 
@@ -14,7 +15,7 @@ export default function createQuiz(birds, language) {
   const btnNext = document.getElementById('btn-next');
   const quiz = document.querySelector('.quiz-random-bird');
   quiz.innerHTML = '';
-  const startBirds = birds[0];
+  const startBirds = [...birds[0]];
   const shuffleStart = shuffle(startBirds);
   const obj = shuffleStart[0];
 
@@ -137,7 +138,7 @@ function checkAnswer(e) {
     correct.play();
     const bird = birdsArr.find(el => el.name === quizName.dataset.name);
 
-    description(bird, container);
+    description(bird, container, audioPlayer2);
     img.src = bird.image;
     quizName.textContent = quizName.dataset.name;
 
@@ -174,7 +175,7 @@ function checkAnswer(e) {
       }
     });
 
-    description(bird, container);
+    description(bird, container, audioPlayer2);
     inCorrect.load();
     inCorrect.play();
     e.currentTarget.firstElementChild.classList.add('error');
@@ -185,63 +186,6 @@ function shuffle(array) {
   const random = array.map(Math.random);
   array.sort((a, b) => random[a.id] - random[b.id]);
   return array;
-}
-
-function description(bird, container) {
-  container.innerHTML = '';
-  const div = document.createElement('div');
-  div.className = 'details-bird-card';
-
-  const divInfo = document.createElement('div');
-  const img = document.createElement('img');
-  const divCont = document.createElement('div');
-  divInfo.className = 'details-bird-card__container';
-  img.className = 'details-bird-card__img img';
-  divCont.className = 'details-bird-card__info';
-
-  img.src = bird.image;
-  img.alt = bird.name;
-  divInfo.append(img);
-  divInfo.append(divCont);
-
-  const divNameCont = document.createElement('div');
-  const spanName = document.createElement('span');
-  const spanNameSpecies = document.createElement('span');
-
-  const divAudio = audioPlayer2.createAudio('details-bird-card');
-  const audio = divAudio.querySelector('audio');
-
-  divNameCont.className = 'details-bird-card__name';
-  spanName.className = 'details-bird-card__name-normal';
-  spanNameSpecies.className = 'details-bird-card__name-species';
-  divAudio.className = 'details-bird-card__audio-player audio-player';
-
-  spanName.textContent = bird.name;
-  spanNameSpecies.textContent = bird.species;
-
-  audio.src = bird.audio;
-
-  divAudio.append(audio);
-  divCont.append(divNameCont);
-  divNameCont.append(spanName);
-  divNameCont.append(spanNameSpecies);
-  divCont.append(divAudio);
-
-  const divText = document.createElement('div');
-  const spanText = document.createElement('span');
-
-  divText.className = 'details-bird-card__container-text';
-  spanText.className = 'details-bird-card__text-content';
-  spanText.textContent = bird.description;
-  divText.append(spanText);
-
-  container.append(div);
-  div.append(divInfo);
-  div.append(divText);
-
-  audio.onloadedmetadata = () => {
-    updateDurationSong(audioPlayer2, divAudio, audio.duration);
-  };
 }
 
 function createSound() {
@@ -376,5 +320,5 @@ function withoutCheckAnswer(e) {
     }
   });
 
-  description(bird, container);
+  description(bird, container, audioPlayer2);
 }
