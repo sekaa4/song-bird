@@ -4,56 +4,49 @@ import createGallery from './createGallery';
 import translate from './translate';
 import birdsData from './birds';
 import birdsDataEn from './birds-en';
-export default function Router(routes) {
-  try {
-    if (!routes) {
-      throw new Error('routes must be provided');
-    }
 
-    this.constructor(routes);
-    this.init();
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-Router.prototype = {
-  routes: null,
-  rootElem: null,
-  constructor: function (routes) {
+export default class Router {
+  constructor(routes) {
     this.routes = routes;
     this.rootElem = document.getElementById('app');
-  },
-  init: function () {
-    let r = this.routes;
-    (function (scope, r) {
+    this.init();
+  }
+
+  init() {
+    const routes = this.routes;
+    (function (scope, routes) {
       window.addEventListener('hashchange', function (e) {
-        scope.hasChanged(scope, r);
+        scope.hasChanged(scope, routes);
       });
-    })(this, r);
-    this.hasChanged(this, r);
-  },
-  hasChanged: function (scope, r) {
+    })(this, routes);
+    this.hasChanged(this, routes);
+  }
+
+  hasChanged(scope, routes) {
     if (window.location.hash.length > 0) {
-      for (let i = 0, length = r.length; i < length; i++) {
-        let route = r[i];
-        if (route.isActiveRoute(window.location.hash.substr(1))) {
+      for (let i = 0, length = routes.length; i < length; i++) {
+        const route = routes[i];
+        if (route.isActiveRoute(window.location.hash.slice(1))) {
           scope.goToRoute(route.htmlName);
         }
       }
     } else {
-      for (let i = 0, length = r.length; i < length; i++) {
-        let route = r[i];
+      for (let i = 0, length = routes.length; i < length; i++) {
+        const route = routes[i];
         if (route.default) {
           scope.goToRoute(route.htmlName);
         }
       }
     }
-  },
-  goToRoute: function (htmlName) {
+  }
+
+  goToRoute(htmlName) {
     (function (scope) {
       let url = 'views/' + htmlName;
       let xhttp = new XMLHttpRequest();
+      xhttp.open('GET', url, true);
+      xhttp.send();
+
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
           const language = document.querySelector('.language.nav__language');
@@ -105,8 +98,6 @@ Router.prototype = {
           }
         }
       };
-      xhttp.open('GET', url, true);
-      xhttp.send();
     })(this);
   }
 };

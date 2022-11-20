@@ -1,5 +1,5 @@
-import Route from './route';
-import Router from './router';
+import Route from './Route';
+import Router from './Router';
 
 export default (function app() {
   function init() {
